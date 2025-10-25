@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이스</title>
+</head>
+<body>
+    <input type="text" id="stat">
+    <button onclick="send()">굴림</button>
+
+    <h2 id="re"></h2>
+
+    <script>
+        function send() {
+            const stat=document.getElementById('stat').value;
+
+            fetch('/process',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({stat:stat})})
+            .then(response => response.json())
+            .then(data => {document.getElementById('re').innerText=data.message})
+            .catch(error => {document.getElementById('re').innerText="오류"+error;})
+        }
+    </script>
+</body>
+</html>
