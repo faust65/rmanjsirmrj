@@ -8,6 +8,7 @@
 <body>
     <input type="text" id="stat">
     <button onclick="send()">굴림</button>
+    <button onclick="send2()">굴림2</button>
 
     <h2 id="re"></h2>
 
@@ -16,6 +17,15 @@
             const stat=document.getElementById('stat').value;
 
             fetch('/process',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({stat:stat})})
+            .then(response => response.json())
+            .then(data => {document.getElementById('re').innerText=data.message})
+            .catch(error => {document.getElementById('re').innerText="오류"+error;})
+        }
+
+        function send2() {
+            const stat=document.getElementById('stat').value;
+
+            fetch('/process2',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({stat:stat})})
             .then(response => response.json())
             .then(data => {document.getElementById('re').innerText=data.message})
             .catch(error => {document.getElementById('re').innerText="오류"+error;})
