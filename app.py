@@ -60,9 +60,10 @@ def process3():
         result.append(name[-1])
 
     message = "\n".join(result)
-    return jsonify({'message':result})
+    return jsonify({'message':message})
     
     
 if __name__ == '__main__':
 
     app.run(debug=True)
+
