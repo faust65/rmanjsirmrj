@@ -53,13 +53,16 @@ def process3():
     random.shuffle(name)
     result=[]
     for i in range(0, len(name)-1,2):
-        message=f"{name[i]}:{name[i+1]}\n"
+        message=f"{name[i]}:{name[i+1]}"
         result.append(message)
 
     if len(name) % 2 == 1:  
         result.append(name[-1])
+
+    message = "\n".join(result)
     return jsonify({'message':result})
     
     
 if __name__ == '__main__':
+
     app.run(debug=True)
