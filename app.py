@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import random
+import math
 
 app=Flask(__name__)
 
@@ -44,6 +45,21 @@ def process2():
         message=f"실패({g})"
     
     return jsonify({'message':message})
+
+@app.route('/process3', methods=['POST'])
+def process3():
+    data=request.get_json()
+    name=data.get('name', '0').split(sep=" ")
+    random.shuffle(name)
+    result=[]
+    for i in range(0, len(name)-1,2):
+        message=f"{name[i]}:{name[i+1]}"
+        result.append(message)
+
+    if len(name) % 2 == 1:  
+        result.append(name[-1])
+    return jsonify({'message':result})
+    
     
 if __name__ == '__main__':
     app.run(debug=True)
